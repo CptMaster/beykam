@@ -1,8 +1,14 @@
 Django==1.10.3
 django-activeurl==0.1.9
 django-appconf==1.0.2
+django-bootstrap-form==3.2.1
 django-classy-tags==0.8.0
+lxml==3.3.0b2
+numpy==1.11.2
+Pillow==3.4.2
+wheel==0.24.0
 #libtfr==1.0.6
 #libxml2-python==2.9.3
-lxml==3.3.0b2
-Pillow==3.4.2
+gunicorn==19.6.0
+whitenoise==3.2.2
+dj-database-url==0.4.1
