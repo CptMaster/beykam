@@ -23,6 +23,13 @@ class PersonnelAddForm(forms.ModelForm):
             'marital_status': 'Medeni Hali',
             'children': 'Çocuk',
             'tax_exemption': 'Vergi Muafiyet Belgesi var mı?',
+            'cut': 'Maliyet Kesintisi',
+            'paid_price': 'Ödenen Miktar',
+        }
+        help_texts = {
+            'cut': 'Maliyet kesintisini oranı yüzde (%) olarak kabul edilir',
+            'tax_exemption': 'Var ise işaretleyiniz',
+            'paid_price': 'Üreticiye ne kadar ödeme yapıldığını yazabilirsiniz'
         }
 
 
@@ -49,7 +56,7 @@ class ProductAddForm(forms.ModelForm):
 class PurchaseForm(forms.ModelForm):
     class Meta:
         model = PurchaseActivity
-        exclude = ()
+        exclude = ('total',)
         labels = {
             'product': 'Ürün',
             'personnel': 'Üretici',
@@ -65,18 +72,20 @@ class PurchaseForm(forms.ModelForm):
 class SaleForm(forms.ModelForm):
     class Meta:
         model = SaleActivity
-        exclude = ()
+        exclude = ('total',)
         labels = {
             'product': 'Ürün',
             'personnel': 'Üretici',
             'discount': 'İndirim',
             'is_free': 'Ücretsiz mi ?',
             'count': 'Adet',
+            'price': 'Satış Fiyatı'
         }
         help_texts = {
             'discount': 'İndirim var ise tutarı yüzde (%) olarak kabul edilir',
             'is_free': 'Ücretsiz ise işaretleyiniz',
             'count': 'Birden fazla satış kaydı girecekseniz adet belirtiniz',
+            'price': 'Eğer indirim girmek istemezseniz satış fiyatını girebilirsiniz',
         }
 
 

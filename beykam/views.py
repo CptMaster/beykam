@@ -32,7 +32,6 @@ def personnel_add(request):
 @login_required()
 def personnel_info(request, personnel_code):
     personnel = get_object_or_404(Personnel, id=personnel_code)
-
     if request.method == 'POST':
         form = PersonnelAddForm(request.POST, request.FILES, instance=personnel)
         if form.is_valid():
@@ -40,6 +39,22 @@ def personnel_info(request, personnel_code):
             messages.success(request, "Üretici Başarıyla Düzenlendi")
             return redirect('personnel_info', personnel.id)
     else:
+        total_purchases = 0
+        total_sales = 0
+        total_purchases_price = 0
+        total_sales_price = 0
+        personnel_purchase_activities = PurchaseActivity.objects.filter(personnel=personnel)
+        for p in personnel_purchase_activities:
+            total_purchases += int(p.count)
+            total_purchases_price += float(p.count) * float(p.product.price)
+        personnel_sales_activities = SaleActivity.objects.filter(personnel=personnel)
+        for s in personnel_sales_activities:
+            total_sales += int(s.count)
+            total_sales_price += float(s.count) * float(s.price)
+        total_remain = total_purchases - total_sales
+        total_remain_price = total_purchases_price - total_sales_price
+        total_cut = float(total_sales_price) * float(personnel.cut) / 100.0
+        total_remain_paid_price = (float(total_sales_price) - total_cut) - float(personnel.paid_price)
         form = PersonnelAddForm(instance=personnel)
     return render(request, 'personnel_info.html', locals())
 
@@ -129,7 +144,9 @@ def purchase(request):
     if request.method == 'POST':
         form = PurchaseForm(request.POST)
         if form.is_valid():
-            form.save()
+            p = form.save(commit=False)
+            p.total = float(p.product.price) * float(p.count)
+            p.save()
             messages.success(request, "Alım Kaydı Başarıyla Eklendi")
             return redirect('purchase')
     else:
@@ -144,7 +161,9 @@ def purchase_info(request, purchase_code):
     if request.method == 'POST':
         form = PurchaseForm(request.POST, instance=purchase)
         if form.is_valid():
-            form.save()
+            p = form.save(commit=False)
+            p.total = float(p.product.price) * float(p.count)
+            p.save()
             messages.success(request, "Alım Kaydı Başarıyla Düzenlendi")
             return redirect('purchase_info', purchase.id)
     else:
@@ -165,17 +184,23 @@ def sales(request):
     if request.method == 'POST':
         form = SaleForm(request.POST)
         if form.is_valid():
-            form.save()
+            sale = form.save(commit=False)
+            if not sale.is_free:
+                if float(sale.price) == float(0.0):
+                    sale.price = float(sale.product.price) - float(sale.product.price) * float(sale.discount) / 100
+                else:
+                    sale.discount = 100.0 * (
+                    (float(sale.product.price) - float(sale.price)) / float(sale.product.price))
+            else:
+                sale.price = 0.0
+                sale.discount = 100.0
+            sale.total = float(sale.product.price) * float(sale.count)
+            sale.save()
             messages.success(request, "Satış Kaydı Başarıyla Eklendi")
             return redirect('sales')
     else:
         form = SaleForm()
     sales = SaleActivity.objects.all()
-    for sale in sales:
-        if not sale.is_free:
-            sale.price = float(sale.product.price)-float(sale.product.price)*float(sale.discount)/100
-        else:
-            sale.price = 0.0
     return render(request, 'sales.html', locals())
 
 
@@ -185,7 +210,18 @@ def sales_info(request, sale_code):
     if request.method == 'POST':
         form = SaleForm(request.POST, instance=sales)
         if form.is_valid():
-            form.save()
+            sale = form.save(commit=False)
+            if not sale.is_free:
+                if float(sale.price) == float(0.0):
+                    sale.price = float(sale.product.price) - float(sale.product.price) * float(sale.discount) / 100
+                else:
+                    sale.discount = 100.0 * (
+                    (float(sale.product.price) - float(sale.price)) / float(sale.product.price))
+            else:
+                sale.price = 0.0
+                sale.discount = 100.0
+            sale.total = float(sale.product.price) * float(sale.count)
+            sale.save()
             messages.success(request, "Satış Kaydı Başarıyla Düzenlendi")
             return redirect('sales_info', sales.id)
     else:
@@ -288,7 +324,7 @@ def login_page(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponseRedirect('/')
+                    return redirect('home')
                 else:
                     messages.add_message(request, messages.ERROR, 'Hesap Kitlenmiş.')
                     return render(request, 'login.html')

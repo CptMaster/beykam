@@ -17,6 +17,8 @@ class Personnel(models.Model):
     marital_status = models.CharField(max_length=255, null=True, blank=True, choices=marital_choices)
     children = models.CharField(max_length=255, null=True, blank=True)
     tax_exemption = models.BooleanField(default=0, blank=True)
+    cut = models.DecimalField(default=30, max_digits=10, decimal_places=2)
+    paid_price = models.DecimalField(default=0, max_digits=10, decimal_places=2)
 
     def __unicode__(self):
         return self.fullname
@@ -35,15 +37,17 @@ class PurchaseActivity(models.Model):
     product = models.ForeignKey('Product')
     personnel = models.ForeignKey('Personnel')
     count = models.IntegerField(default=1)
-    cut = models.DecimalField(default=30, max_digits=10, decimal_places=2)
+    total = models.DecimalField(default=0, max_digits=10, decimal_places=2)
 
 
 class SaleActivity(models.Model):
     product = models.ForeignKey('Product')
     personnel = models.ForeignKey('Personnel')
     discount = models.DecimalField(default=0, max_digits=10, decimal_places=2)
+    price = models.DecimalField(default=0, max_digits=10, decimal_places=2)
     count = models.IntegerField(default=1)
     is_free = models.BooleanField(default=False)
+    total = models.DecimalField(default=0, max_digits=10, decimal_places=2)
 
 
 class Supplier(models.Model):

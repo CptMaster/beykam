@@ -11,8 +11,9 @@
                     <th>Alım No</th>
                     <th>Üretici</th>
                     <th>Üretim</th>
-                    <th>Üretim Adedi</th>
                     <th>Üretim Ücreti</th>
+                    <th>Üretim Adedi</th>
+                    <th>Toplam Ücret</th>
                     <th>Eylemler</th>
                 </tr>
                 </thead>
@@ -22,8 +23,9 @@
                     <td>{{ purchase.id }}</td>
                     <td><a href="{% url 'personnel_info' purchase.personnel.id %}">{{ purchase.personnel.fullname }}</a></td>
                     <td><a href="{% url 'product_info' purchase.product.id %}">{{ purchase.product }}</a></td>
-                    <td>{{ purchase.count }}</td>
                     <td>{{ purchase.product.price }} TL</td>
+                    <td>{{ purchase.count }}</td>
+                    <td>{{ purchase.total }} TL</td>
                     <td>
                         <div class="btn-group btn-group-xs">
                             <a href="{% url 'purchase_info' purchase.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>

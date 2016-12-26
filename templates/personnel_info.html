@@ -5,6 +5,44 @@
 {% block section %}{{ personnel.fullname }} - Üretici Detayları{% endblock %}
 {% block content %}
     <div class="row">
+        <legend>Üretici Kasa Hesabı</legend>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Üretici Kodu</th>
+                    <th>Üretilen Topam</th>
+                    <th>Satılan Toplam</th>
+                    <th>Kalan Toplam</th>
+                    <th>Üretilen Toplam Ücret</th>
+                    <th>Satılan Toplam Ücret</th>
+                    <th>Kalan Toplam Ücret</th>
+                    <th>Maliyet Kesinti Oranı</th>
+                    <th>Toplam Maliyet Kesinti Ücreti</th>
+                    <th>Ödenen Ücret</th>
+                    <th>Ödenecek Ücret</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ personnel.id }}</td>
+                    <td>{{ total_purchases }}</td>
+                    <td>{{ total_sales }}</td>
+                    <td>{{ total_remain }}</td>
+                    <td>{{ total_purchases_price }}</td>
+                    <td>{{ total_sales_price }}</td>
+                    <td>{{ total_remain_price }}</td>
+                    <td>%{{ personnel.cut }}</td>
+                    <td>{{ total_cut }}</td>
+                    <td>{{ personnel.paid_price }}</td>
+                    <td>{{ total_remain_paid_price }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <legend>Üreticiyi Düzenle</legend>
         <div class="col-lg-6 col-md-6">
             <form role="form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
