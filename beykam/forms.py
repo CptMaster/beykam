@@ -110,6 +110,7 @@ class InventoryForm(forms.ModelForm):
         model = Inventory
         exclude = ()
         labels = {
+            'name':'Tipi',
             'supplier': 'İşyeri',
             'quantity': 'Miktarı',
             'unit': 'Birimi',
@@ -118,6 +119,7 @@ class InventoryForm(forms.ModelForm):
         }
         help_texts = {
             'unit': 'Örneğin kg, m, dm, g gibi birimler yazabilirsiniz',
+            'name': 'İplik gibi isim verebilirsiniz'
         }
         widgets = {
             'date': DateInput(),

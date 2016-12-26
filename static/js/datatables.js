@@ -35,7 +35,7 @@ $(function () {
             {"width": "7%", "targets": 0},
             {"width": "25%", "targets": 1},
             {"width": "25%", "targets": 2},
-            {"bSortable": false, "aTargets": [5]}
+            {"bSortable": false, "aTargets": [6]}
         ],
         "language": {
             "url": "/static/json/Turkish.json"
@@ -46,7 +46,8 @@ $(function () {
             {"width": "7%", "targets": 0},
             {"width": "25%", "targets": 1},
             {"width": "25%", "targets": 2},
-            {"bSortable": false, "aTargets": [7]}
+            {"width": "10%", "targets": 9},
+            {"bSortable": false, "aTargets": [9]}
         ],
         "language": {
             "url": "/static/json/Turkish.json"
@@ -76,3 +77,8 @@ $(function () {
     });
 
 });
+
+function clicked(e)
+{
+    if(!confirm('Silmek istediğinize emin misiniz?'))e.preventDefault();
+}

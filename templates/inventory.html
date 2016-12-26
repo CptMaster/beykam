@@ -19,20 +19,23 @@
                 </thead>
                 <tbody>
                 {% for inventory in inventories %}
-                <tr>
-                    <td>{{ inventory.id }}</td>
-                    <td><a href="{% url 'supplier_info' inventory.supplier.id %}">{{ inventory.supplier.name }}</a></td>
-                    <td>{{ inventory.quantity }}</td>
-                    <td>{{ inventory.unit }}</td>
-                    <td>{{ inventory.price }} TL</td>
-                    <td>{{ inventory.date }}</td>
-                    <td>
-                        <div class="btn-group btn-group-xs">
-                            <a href="{% url 'inventory_info' inventory.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
-                            <a href="{% url 'inventory_del' inventory.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ inventory.id }}</td>
+                        <td><a href="{% url 'supplier_info' inventory.supplier.id %}">{{ inventory.supplier.name }}</a>
+                        </td>
+                        <td>{{ inventory.quantity }}</td>
+                        <td>{{ inventory.unit }}</td>
+                        <td>{{ inventory.price }} TL</td>
+                        <td>{{ inventory.date }}</td>
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                <a href="{% url 'inventory_info' inventory.id %}" data-toggle="tooltip" title="Düzenle"
+                                   class="btn btn-warning">Düzenle</a>
+                                <a href="{% url 'inventory_del' inventory.id %}" data-toggle="tooltip" title="Sil"
+                                   class="btn btn-danger" onclick="clicked(event)">Sil</a>
+                            </div>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

@@ -19,20 +19,24 @@
                 </thead>
                 <tbody>
                 {% for purchase in purchases %}
-                <tr>
-                    <td>{{ purchase.id }}</td>
-                    <td><a href="{% url 'personnel_info' purchase.personnel.id %}">{{ purchase.personnel.fullname }}</a></td>
-                    <td><a href="{% url 'product_info' purchase.product.id %}">{{ purchase.product }}</a></td>
-                    <td>{{ purchase.product.price }} TL</td>
-                    <td>{{ purchase.count }}</td>
-                    <td>{{ purchase.total }} TL</td>
-                    <td>
-                        <div class="btn-group btn-group-xs">
-                            <a href="{% url 'purchase_info' purchase.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
-                            <a href="{% url 'purchase_del' purchase.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ purchase.id }}</td>
+                        <td>
+                            <a href="{% url 'personnel_info' purchase.personnel.id %}">{{ purchase.personnel.fullname }}</a>
+                        </td>
+                        <td><a href="{% url 'product_info' purchase.product.id %}">{{ purchase.product }}</a></td>
+                        <td>{{ purchase.product.price }} TL</td>
+                        <td>{{ purchase.count }}</td>
+                        <td>{{ purchase.total }} TL</td>
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                <a href="{% url 'purchase_info' purchase.id %}" data-toggle="tooltip" title="Düzenle"
+                                   class="btn btn-warning">Düzenle</a>
+                                <a href="{% url 'purchase_del' purchase.id %}" data-toggle="tooltip" title="Sil"
+                                   class="btn btn-danger" onclick="clicked(event)">Sil</a>
+                            </div>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

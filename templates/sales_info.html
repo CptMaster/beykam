@@ -10,8 +10,8 @@
                 {{ form|bootstrap }}
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Satışı Kaydet</button>
-                     <a href="{% url 'sales_del' sales.id %}">
-                        <button type="button" class="btn btn-danger">Satışı Sil</button>
+                    <a href="{% url 'sales_del' sales.id %}">
+                        <button type="button" class="btn btn-danger" onclick="clicked(event)">Satışı Sil</button>
                     </a>
                 </div>
             </form>

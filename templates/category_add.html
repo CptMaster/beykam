@@ -15,16 +15,18 @@
                 </thead>
                 <tbody>
                 {% for category in categories %}
-                <tr>
-                    <td>{{ category.id }}</td>
-                    <td>{{ category.name }}</td>
-                    <td>
-                        <div class="btn-group btn-group-xs">
-                            <a href="{% url 'category_info' category.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
-                            <a href="{% url 'category_del' category.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                <a href="{% url 'category_info' category.id %}" data-toggle="tooltip" title="Düzenle"
+                                   class="btn btn-warning">Düzenle</a>
+                                <a href="{% url 'category_del' category.id %}" data-toggle="tooltip" title="Sil"
+                                   class="btn btn-danger" onclick="clicked(event)">Sil</a>
+                            </div>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

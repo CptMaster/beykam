@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-# Create your views here.
 from beykam.forms import SignInForm, PersonnelAddForm, CategoryAddForm, ProductAddForm, PurchaseForm, SaleForm, \
     SupplierForm, InventoryForm
 from beykam.models import Personnel, Category, Product, PurchaseActivity, SaleActivity, Supplier, Inventory
@@ -12,7 +11,35 @@ from beykam.models import Personnel, Category, Product, PurchaseActivity, SaleAc
 
 @login_required()
 def homepage(request):
-    return render(request, 'home.html')
+    personnal = Personnel.objects.all()
+    total_personnal = personnal.count()
+    total_personnal_price = 0
+    for p in personnal:
+        total_personnal_price += float(p.paid_price)
+
+    total_category = Category.objects.all().count()
+    total_product = Product.objects.all().count()
+    inventory = Inventory.objects.all()
+    total_inventory = inventory.count()
+    total_inventory_price = 0
+    for i in inventory:
+        total_inventory_price += float(i.price)
+    total_purchase = 0
+    total_purchase_price = 0
+    total_sales = 0
+    total_sales_price = 0
+
+    personnel_purchase_activities = PurchaseActivity.objects.all()
+    for p in personnel_purchase_activities:
+        total_purchase += int(p.count)
+        total_purchase_price += float(p.count) * float(p.product.price)
+    personnel_sales_activities = SaleActivity.objects.all()
+    for s in personnel_sales_activities:
+        total_sales += int(s.count)
+        total_sales_price += float(s.count) * float(s.price)
+    total_personnal_cut_price = float(total_sales_price) * float(30) / 100.0
+    total_personnal_remain_price = (float(total_sales_price) - total_personnal_cut_price) - float(total_personnal_price)
+    return render(request, 'home.html', locals())
 
 
 @login_required()
@@ -190,7 +217,7 @@ def sales(request):
                     sale.price = float(sale.product.price) - float(sale.product.price) * float(sale.discount) / 100
                 else:
                     sale.discount = 100.0 * (
-                    (float(sale.product.price) - float(sale.price)) / float(sale.product.price))
+                        (float(sale.product.price) - float(sale.price)) / float(sale.product.price))
             else:
                 sale.price = 0.0
                 sale.discount = 100.0
@@ -216,7 +243,7 @@ def sales_info(request, sale_code):
                     sale.price = float(sale.product.price) - float(sale.product.price) * float(sale.discount) / 100
                 else:
                     sale.discount = 100.0 * (
-                    (float(sale.product.price) - float(sale.price)) / float(sale.product.price))
+                        (float(sale.product.price) - float(sale.price)) / float(sale.product.price))
             else:
                 sale.price = 0.0
                 sale.discount = 100.0

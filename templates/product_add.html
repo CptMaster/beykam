@@ -16,17 +16,19 @@
                 </thead>
                 <tbody>
                 {% for product in products %}
-                <tr>
-                    <td>{{ product.category.id }}_{{ product.id }}</td>
-                    <td>{{ product.category.name }} - {{ product.name }}</td>
-                    <td>{{ product.price }} TL</td>
-                    <td>
-                        <div class="btn-group btn-group-xs">
-                            <a href="{% url 'product_info' product.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
-                            <a href="{% url 'product_del' product.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ product.category.id }}_{{ product.id }}</td>
+                        <td>{{ product.category.name }} - {{ product.name }}</td>
+                        <td>{{ product.price }} TL</td>
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                <a href="{% url 'product_info' product.id %}" data-toggle="tooltip" title="Düzenle"
+                                   class="btn btn-warning">Düzenle</a>
+                                <a href="{% url 'product_del' product.id %}" data-toggle="tooltip" title="Sil"
+                                   class="btn btn-danger" onclick="clicked(event)">Sil</a>
+                            </div>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

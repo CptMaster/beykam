@@ -69,6 +69,7 @@ class Category(models.Model):
 
 class Inventory(models.Model):
     supplier = models.ForeignKey('Supplier')
+    name = models.CharField(max_length=255, null=True, blank=True)
     quantity = models.IntegerField(default=1)
     unit = models.CharField(max_length=255, null=True, blank=True)
     price = models.DecimalField(null=True, max_digits=10, decimal_places=2)

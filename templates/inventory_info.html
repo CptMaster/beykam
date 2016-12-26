@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Envanteri Kaydet</button>
                     <a href="{% url 'inventory_del' inventory.id %}">
-                        <button type="button" class="btn btn-danger">Envanteri Sil</button>
+                        <button type="button" class="btn btn-danger" onclick="clicked(event)">Envanteri Sil</button>
                     </a>
                 </div>
             </form>

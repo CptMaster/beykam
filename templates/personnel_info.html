@@ -29,13 +29,13 @@
                     <td>{{ total_purchases }}</td>
                     <td>{{ total_sales }}</td>
                     <td>{{ total_remain }}</td>
-                    <td>{{ total_purchases_price }}</td>
-                    <td>{{ total_sales_price }}</td>
-                    <td>{{ total_remain_price }}</td>
+                    <td>{{ total_purchases_price }} TL</td>
+                    <td>{{ total_sales_price }} TL</td>
+                    <td>{{ total_remain_price }} TL</td>
                     <td>%{{ personnel.cut }}</td>
-                    <td>{{ total_cut }}</td>
-                    <td>{{ personnel.paid_price }}</td>
-                    <td>{{ total_remain_paid_price }}</td>
+                    <td>{{ total_cut }} TL</td>
+                    <td>{{ personnel.paid_price }} TL</td>
+                    <td>{{ total_remain_paid_price }} TL</td>
                 </tr>
                 </tbody>
             </table>
@@ -49,14 +49,19 @@
                 {{ form|bootstrap }}
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Üreticiyi Kaydet</button>
-                    <a href="{% url 'personnel_del' personnel.id %}"><button type="button" class="btn btn-danger">Üreticiyi Sil</button></a>
+                    <a href="{% url 'personnel_del' personnel.id %}">
+                        <button type="button" class="btn btn-danger" onclick="clicked(event)">Üreticiyi Sil</button>
+                    </a>
                 </div>
             </form>
         </div>
         <div class="col-lg-6 col-md-6">
             <div class="col-sm-6 col-md-4">
                 <strong>Fotoğraf:</strong><br>
-                <img src="{% if personnel.photo %}{{ personnel.photo.url }}{% else %}{% static 'img/user-none.png' %}{% endif %}" alt="" class="img-rounded img-responsive"/>
+                <img src="
+
+                        {% if personnel.photo %}{{ personnel.photo.url }}{% else %}{% static 'img/user-none.png' %}{% endif %}"
+                     alt="" class="img-rounded img-responsive"/>
             </div>
         </div>
 

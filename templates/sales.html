@@ -22,23 +22,26 @@
                 </thead>
                 <tbody>
                 {% for sale in sales %}
-                <tr>
-                    <td>{{ sale.id }}</td>
-                    <td><a href="{% url 'personnel_info' sale.personnel.id %}">{{ sale.personnel.fullname }}</a></td>
-                    <td><a href="{% url 'product_info' sale.product.id %}">{{ sale.product }}</a></td>
-                    <td>{{ sale.product.price|floatformat }} TL</td>
-                    <td>%{{ sale.discount }}</td>
-                    <td>{{ sale.price|floatformat }} TL</td>
-                    <td>{{ sale.count }}</td>
-                    <td>{{ sale.total|floatformat }} TL</td>
-                    <td>{% if sale.is_free %}Evet{% else %}Hayır{% endif %}</td>
-                    <td>
-                        <div class="btn-group btn-group-xs">
-                            <a href="{% url 'sales_info' sale.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
-                            <a href="{% url 'sales_del' sale.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ sale.id }}</td>
+                        <td><a href="{% url 'personnel_info' sale.personnel.id %}">{{ sale.personnel.fullname }}</a>
+                        </td>
+                        <td><a href="{% url 'product_info' sale.product.id %}">{{ sale.product }}</a></td>
+                        <td>{{ sale.product.price|floatformat }} TL</td>
+                        <td>%{{ sale.discount }}</td>
+                        <td>{{ sale.price|floatformat }} TL</td>
+                        <td>{{ sale.count }}</td>
+                        <td>{{ sale.total|floatformat }} TL</td>
+                        <td>{% if sale.is_free %}Evet{% else %}Hayır{% endif %}</td>
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                <a href="{% url 'sales_info' sale.id %}" data-toggle="tooltip" title="Düzenle"
+                                   class="btn btn-warning">Düzenle</a>
+                                <a href="{% url 'sales_del' sale.id %}" data-toggle="tooltip" title="Sil"
+                                   class="btn btn-danger" onclick="clicked(event)">Sil</a>
+                            </div>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
