@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}Üretim Kayıt Alanı{% endblock %}
+{% block section %}Üretim Kayıt Alanı{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="table-responsive">
+            <table id="product-data" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Üretim Kodu</th>
+                    <th>Üretim İsmi</th>
+                    <th>Üretim Ücreti</th>
+                    <th>Eylemler</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.category.id }}_{{ product.id }}</td>
+                    <td>{{ product.category.name }} - {{ product.name }}</td>
+                    <td>{{ product.price }} TL</td>
+                    <td>
+                        <div class="btn-group btn-group-xs">
+                            <a href="{% url 'product_info' product.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
+                            <a href="{% url 'product_del' product.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post">
+                <legend>Yeni Üretim Ekle</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Üretim Ekle</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% load activeurl %}
+{% activeurl %}
+<ul class="nav nav-sidebar">
+    <li><a href="{% url 'home' %}">Anasayfa</a></li>
+    <li><a href="{% url 'personnel_add' %}">Üretici Kayıt Alanı</a></li>
+    <li><a href="{% url 'category_add' %}">Üretim Şablonu Ekle</a></li>
+    <li><a href="{% url 'product_add' %}">Üretim Kayıt Alanı</a></li>
+    <li><a href="{% url 'purchase' %}">Alım</a></li>
+    <li><a href="{% url 'sales' %}">Satış</a></li>
+    <li><a href="{% url 'inventory' %}">Envanter</a></li>
+    <li><a href="{% url 'supplier' %}">İş Yerleri</a></li>
+</ul>
+{% endactiveurl %}

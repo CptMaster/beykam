@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load staticfiles %}
+{% block title %}{{ product.name }} - Üretim Detayları{% endblock %}
+{% block section %}{{ product.name }} - Üretim Detayları{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Üretimi Kaydet</button>
+                    <a href="{% url 'product_del' product.id %}">
+                        <button type="button" class="btn btn-danger">Üretimi Sil</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

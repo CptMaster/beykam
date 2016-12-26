@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}İşyeri Kayıt Alanı{% endblock %}
+{% block section %}İşyeri Kayıt Alanı{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="table-responsive">
+            <table id="supplier-data" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>İşyeri Kodu</th>
+                    <th>İşyeri Adı</th>
+                    <th>İşyeri Telefon</th>
+                    <th>İşyeri Eposta</th>
+                    <th>Eylemler</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for supplier in suppliers %}
+                <tr>
+                    <td>{{ supplier.id }}</td>
+                    <td>{{ supplier.name }}</td>
+                    <td>{{ supplier.phone }}</td>
+                    <td>{{ supplier.email }}</td>
+                    <td>
+                        <div class="btn-group btn-group-xs">
+                            <a href="{% url 'supplier_info' supplier.id %}" data-toggle="tooltip" title="Detay" class="btn btn-info">Detay</a>
+                            <a href="{% url 'supplier_del' supplier.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post">
+                <legend>Yeni İşyeri Ekle</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">İşyeri Ekle</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

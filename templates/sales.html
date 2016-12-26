@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}Satış Kayıtları{% endblock %}
+{% block section %}Satış Kayıtları{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="table-responsive">
+            <table id="sales-data" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Satış No</th>
+                    <th>Üretici</th>
+                    <th>Üretim</th>
+                    <th>Üretim Ücreti</th>
+                    <th>Satış İndirimi</th>
+                    <th>Satış Ücreti</th>
+                    <th>Ücretsiz?</th>
+                    <th>Eylemler</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for sale in sales %}
+                <tr>
+                    <td>{{ sale.id }}</td>
+                    <td><a href="{% url 'personnel_info' sale.personnel.id %}">{{ sale.personnel.fullname }}</a></td>
+                    <td><a href="{% url 'product_info' sale.product.id %}">{{ sale.product }}</a></td>
+                    <td>{{ sale.product.price|floatformat }} TL</td>
+                    <td>%{{ sale.discount }}</td>
+                    <td>{{ sale.price|floatformat }} TL</td>
+                    <td>{% if sale.is_free %}Evet{% else %}Hayır{% endif %}</td>
+                    <td>
+                        <div class="btn-group btn-group-xs">
+                            <a href="{% url 'sales_info' sale.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
+                            <a href="{% url 'sales_del' sale.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post">
+                <legend>Yeni Satış Ekle</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Satış Ekle</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

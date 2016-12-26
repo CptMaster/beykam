@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}Üretim Şablonu Ekle{% endblock %}
+{% block section %}Üretim Şablonu Ekle{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="table-responsive">
+            <table id="category-data" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Şablon Kodu</th>
+                    <th>Şablon İsmi</th>
+                    <th>Eylemler</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>
+                        <div class="btn-group btn-group-xs">
+                            <a href="{% url 'category_info' category.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
+                            <a href="{% url 'category_del' category.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post">
+                <legend>Yeni Üretim Şablonu Ekle</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Şablon Ekle</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

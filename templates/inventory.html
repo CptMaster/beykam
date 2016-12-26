@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}Envanter Kayıt Alanı{% endblock %}
+{% block section %}Envanter Kayıt Alanı{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="table-responsive">
+            <table id="inventory-data" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Envanter Kodu</th>
+                    <th>İşyeri</th>
+                    <th>Miktarı</th>
+                    <th>Birimi</th>
+                    <th>Fiyat</th>
+                    <th>Tarih</th>
+                    <th>Eylemler</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for inventory in inventories %}
+                <tr>
+                    <td>{{ inventory.id }}</td>
+                    <td><a href="{% url 'supplier_info' inventory.supplier.id %}">{{ inventory.supplier.name }}</a></td>
+                    <td>{{ inventory.quantity }}</td>
+                    <td>{{ inventory.unit }}</td>
+                    <td>{{ inventory.price }} TL</td>
+                    <td>{{ inventory.date }}</td>
+                    <td>
+                        <div class="btn-group btn-group-xs">
+                            <a href="{% url 'inventory_info' inventory.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
+                            <a href="{% url 'inventory_del' inventory.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post">
+                <legend>Yeni Envanter Ekle</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Envanter Ekle</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

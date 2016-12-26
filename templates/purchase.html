@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}Alım Kayıtları{% endblock %}
+{% block section %}Alım Kayıtları{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="table-responsive">
+            <table id="purchase-data" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Alım No</th>
+                    <th>Üretici</th>
+                    <th>Üretim</th>
+                    <th>Üretim Adedi</th>
+                    <th>Üretim Ücreti</th>
+                    <th>Eylemler</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for purchase in purchases %}
+                <tr>
+                    <td>{{ purchase.id }}</td>
+                    <td><a href="{% url 'personnel_info' purchase.personnel.id %}">{{ purchase.personnel.fullname }}</a></td>
+                    <td><a href="{% url 'product_info' purchase.product.id %}">{{ purchase.product }}</a></td>
+                    <td>{{ purchase.count }}</td>
+                    <td>{{ purchase.product.price }} TL</td>
+                    <td>
+                        <div class="btn-group btn-group-xs">
+                            <a href="{% url 'purchase_info' purchase.id %}" data-toggle="tooltip" title="Düzenle" class="btn btn-warning">Düzenle</a>
+                            <a href="{% url 'purchase_del' purchase.id %}" data-toggle="tooltip" title="Sil" class="btn btn-danger">Sil</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post">
+                <legend>Yeni Alım Ekle</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Alım Ekle</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

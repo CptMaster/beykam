@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}{{ category.name }} - Üretim Şablonu Detayları{% endblock %}
+{% block section %}{{ category.name }} - Üretim Şablonu Detayları{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Şablonu Kaydet</button>
+                    <a href="{% url 'category_del' category.id %}">
+                        <button type="button" class="btn btn-danger">Şablonu Sil</button>
+                    </a>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

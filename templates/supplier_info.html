@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}İşyeri - {{ supplier.name }}{% endblock %}
+{% block section %}İşyeri - {{ supplier.name }}{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">İşyerini Kaydet</button>
+                    <a href="{% url 'supplier_del' supplier.id %}">
+                        <button type="button" class="btn btn-danger">İşyerini Sil</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
