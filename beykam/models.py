@@ -10,10 +10,9 @@ marital_choices = (('Evli', 'Evli'),
 class Personnel(models.Model):
     fullname = models.CharField(max_length=255, null=True)
     phone = models.CharField(max_length=255, null=True)
-    email = models.EmailField(null=True)
+    email = models.EmailField(null=True, blank=True)
     photo = models.ImageField(upload_to='personnel', blank=True, null=True)
     address = models.CharField(max_length=255, null=True, blank=True)
-    house = models.CharField(max_length=255, null=True, blank=True)
     marital_status = models.CharField(max_length=255, null=True, blank=True, choices=marital_choices)
     children = models.CharField(max_length=255, null=True, blank=True)
     tax_exemption = models.BooleanField(default=0, blank=True)
@@ -27,6 +26,8 @@ class Personnel(models.Model):
 class Product(models.Model):
     category = models.ForeignKey('Category')
     name = models.CharField(max_length=255, null=True)
+    dimension_code = models.CharField(max_length=3, null=True, blank=True)
+    color_code = models.CharField(max_length=1, null=True, blank=True)
     price = models.DecimalField(null=True, max_digits=10, decimal_places=2)
 
     def __unicode__(self):

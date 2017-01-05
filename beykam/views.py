@@ -28,6 +28,7 @@ def homepage(request):
     total_purchase_price = 0
     total_sales = 0
     total_sales_price = 0
+    total_personnal_cut_price = 0
 
     personnel_purchase_activities = PurchaseActivity.objects.all()
     for p in personnel_purchase_activities:
@@ -37,8 +38,11 @@ def homepage(request):
     for s in personnel_sales_activities:
         total_sales += int(s.count)
         total_sales_price += float(s.count) * float(s.price)
-    total_personnal_cut_price = float(total_sales_price) * float(30) / 100.0
+        total_personnal_cut_price += float(s.count) * float(s.price) * float(s.personnel.cut) / 100.0
     total_personnal_remain_price = (float(total_sales_price) - total_personnal_cut_price) - float(total_personnal_price)
+    total_enter_price = total_personnal_cut_price
+    total_exit_price = total_inventory_price
+    total_diff = total_enter_price - total_exit_price
     return render(request, 'home.html', locals())
 
 

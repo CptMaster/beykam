@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_activeurl',
     'beykam',
-    'bootstrapform'
+    'bootstrapform',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

@@ -50,6 +50,8 @@ class ProductAddForm(forms.ModelForm):
             'name': 'Ürün İsmi',
             'category': 'Şablon',
             'price': 'Fiyat',
+            'dimension_code': 'Ebat Kodu',
+            'color_code': 'Renk Kodu'
         }
 
 

@@ -18,7 +18,7 @@
                 <tbody>
                 {% for supplier in suppliers %}
                     <tr>
-                        <td>{{ supplier.id }}</td>
+                        <td>{{ supplier.id|stringformat:".3d" }}</td>
                         <td>{{ supplier.name }}</td>
                         <td>{{ supplier.phone }}</td>
                         <td>{{ supplier.email }}</td>

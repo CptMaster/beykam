@@ -23,7 +23,7 @@
                 <tbody>
                 {% for sale in sales %}
                     <tr>
-                        <td>{{ sale.id }}</td>
+                        <td>{{ sale.id|stringformat:".5d" }}</td>
                         <td><a href="{% url 'personnel_info' sale.personnel.id %}">{{ sale.personnel.fullname }}</a>
                         </td>
                         <td><a href="{% url 'product_info' sale.product.id %}">{{ sale.product }}</a></td>

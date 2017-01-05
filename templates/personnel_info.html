@@ -25,7 +25,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>{{ personnel.id }}</td>
+                    <td>{{ personnel.id|stringformat:".4d" }}</td>
                     <td>{{ total_purchases }}</td>
                     <td>{{ total_sales }}</td>
                     <td>{{ total_remain }}</td>

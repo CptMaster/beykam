@@ -20,7 +20,7 @@
                 <tbody>
                 {% for purchase in purchases %}
                     <tr>
-                        <td>{{ purchase.id }}</td>
+                        <td>{{ purchase.id|stringformat:".5d" }}</td>
                         <td>
                             <a href="{% url 'personnel_info' purchase.personnel.id %}">{{ purchase.personnel.fullname }}</a>
                         </td>

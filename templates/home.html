@@ -7,7 +7,7 @@
         <p>Genel muhasebe durumunu buradan izleyebilirsiniz</p>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-12">
+        <div class="col-sm-6 col-md-6">
             <div class="thumbnail">
                 <div class="caption">
                     <h3>Üreticiler</h3>
@@ -15,6 +15,17 @@
                     <p>Toplam üreticilere ödenen miktar: {{ total_personnal_price }} TL</p>
                     <p>Toplam üreticilere ödenenmesi gereken miktar: {{ total_personnal_remain_price }} TL</p>
                     <p>Toplam maliyet kesinti ücreti: {{ total_personnal_cut_price }} TL</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Kasa</h3>
+                    <p>Giren Para: {{ total_enter_price }} TL</p>
+                    <p>Çıkan Para: {{ total_exit_price }} TL</p>
+                    <p>Aradaki Fark: {{ total_diff }} TL</p>
+                    <p><br></p>
                 </div>
             </div>
         </div>
@@ -32,9 +43,9 @@
         <div class="col-sm-6 col-md-6">
             <div class="thumbnail">
                 <div class="caption">
-                    <h3>Envanter</h3>
-                    <p>Toplam alınan envanter kaydı: {{ total_inventory }}</p>
-                    <p>Toplamda alınan envanter fiyatı: {{ total_inventory_price }} TL</p>
+                    <h3>Satınalma</h3>
+                    <p>Toplam satınalma kaydı: {{ total_inventory }}</p>
+                    <p>Toplamda satınalma fiyatı: {{ total_inventory_price }} TL</p>
                 </div>
             </div>
         </div>

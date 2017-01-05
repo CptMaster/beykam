@@ -18,8 +18,8 @@
                 <tbody>
                 {% for personnel in personnels %}
                     <tr>
-                        <td>{{ personnel.id }}</td>
-                        <td>{{ personnel.fullname }}</td>
+                        <td>{{ personnel.id|stringformat:".4d" }}</td>
+                        <td><a href="{% url 'personnel_info' personnel.id %}">{{ personnel.fullname }}</a></td>
                         <td>{{ personnel.phone }}</td>
                         <td>{{ personnel.email }}</td>
                         <td>
